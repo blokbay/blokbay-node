@@ -1,0 +1,57 @@
+{
+  "name": "blokbay",
+  "version": "1.0.0",
+  "description": "Official Blokbay client: accept crypto payments (Bitcoin, USDT, USDC, ETH) on your website. Non-custodial crypto payment gateway, payments API and webhook signature verification. Zero dependencies, Node.js, Deno, Bun and Cloudflare Workers.",
+  "keywords": [
+    "crypto payments",
+    "cryptocurrency",
+    "bitcoin",
+    "usdt",
+    "tether",
+    "usdc",
+    "stablecoin",
+    "ethereum",
+    "payment gateway",
+    "crypto payment gateway",
+    "non-custodial",
+    "webhook",
+    "accept crypto",
+    "blokbay"
+  ],
+  "license": "MIT",
+  "author": "Blokbay <mail@blokbay.com>",
+  "homepage": "https://blokbay.com/crypto-payment-gateway",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blokbay/blokbay-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/blokbay/blokbay-node/issues",
+    "email": "mail@blokbay.com"
+  },
+  "type": "module",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src/index.js",
+    "src/index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  }
+}
