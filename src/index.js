@@ -1,6 +1,15 @@
 // Blokbay: official client for the Blokbay payments API (https://blokbay.com/docs/api).
 // Zero dependencies. Uses only fetch, TextEncoder and Web Crypto, so it runs on Node.js 18+, Deno, Bun and Cloudflare Workers.
 
+// Web Crypto: global in Node 20+, Deno, Bun and Workers; on Node 18 it lives in node:crypto (webcrypto).
+let subtleCache;
+async function getSubtle() {
+  if (subtleCache) return subtleCache;
+  if (globalThis.crypto?.subtle) return (subtleCache = globalThis.crypto.subtle);
+  try { const m = await import('node:crypto'); subtleCache = m.webcrypto?.subtle || null; } catch { subtleCache = null; }
+  return subtleCache;
+}
+
 export const VERSION = '1.0.0';
 export const DEFAULT_BASE_URL = 'https://blokbay.com/api/v1';
 /** Default webhook timestamp tolerance in seconds (same as the Blokbay plugins). */
@@ -144,7 +153,7 @@ const toBytes = (x) => {
 };
 
 async function hmacHex(secret, bytes) {
-  const subtle = globalThis.crypto?.subtle;
+  const subtle = await getSubtle();
   if (!subtle) throw new Error('Blokbay: Web Crypto (crypto.subtle) is not available. Use Node.js 18+, Deno, Bun or Workers.');
   const key = await subtle.importKey('raw', enc.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
   const sig = new Uint8Array(await subtle.sign('HMAC', key, bytes));

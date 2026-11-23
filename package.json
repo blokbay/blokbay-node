@@ -1,6 +1,6 @@
 {
   "name": "blokbay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official Blokbay client: accept crypto payments (Bitcoin, USDT, USDC, ETH) on your website. Non-custodial crypto payment gateway, payments API and webhook signature verification. Zero dependencies, Node.js, Deno, Bun and Cloudflare Workers.",
   "keywords": [
     "crypto payments",
